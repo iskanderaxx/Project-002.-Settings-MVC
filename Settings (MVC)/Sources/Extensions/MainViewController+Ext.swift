@@ -44,9 +44,9 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
             tableView.deselectRow(at: indexPath, animated: true)
             viewController.setting = settings?[indexPath.section][indexPath.row]
             navigationController?.pushViewController(viewController, animated: true)
-            print("Выбрана ячейка \(settings?[indexPath.section][indexPath.row].name ?? "")")
+            print("Выбрана ячейка \(settings?[indexPath.section][indexPath.row].title ?? "")")
         } else {
-            print("Выбрана ячейка \(settings?[indexPath.section][indexPath.row].name ?? ""), detailed view для нее не работает.")
+            print("Выбрана ячейка \(settings?[indexPath.section][indexPath.row].title ?? ""), detailed view для нее не работает.")
         }
     }
 }

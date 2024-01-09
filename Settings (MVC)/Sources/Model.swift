@@ -1,5 +1,5 @@
 
-import UIKit
+import Foundation
 
 enum TypeOfSetting: String {
     case withDisclosureOption
@@ -7,30 +7,32 @@ enum TypeOfSetting: String {
 }
 
 struct Setting: Hashable {
-    var icon: UIImage?
-    var name: String
-    var status: String = ""
+    var icon = String()
+    var title: String
+    var status = String()
     var type: TypeOfSetting
 }
 
 extension Setting {
     static var settings: [[Setting]] = [
-       [Setting(icon: UIImage(named: "airplane")!, name: "Авиарежим", type: .withSwitchButton),
-        Setting(icon: UIImage(named: "wifi")!, name: "Wi-Fi", status: "Не подключено", type: .withDisclosureOption),
-        Setting(icon: UIImage(named: "bluetooth")!, name: "Bluetooth", status: "Вкл.", type: .withDisclosureOption),
-        Setting(icon: UIImage(named: "antenna.radiowaves.left.and.right")!, name: "Сотовая связь", type: .withDisclosureOption),
-        Setting(icon: UIImage(named: "personalhotspot")!, name: "Режим модема", type: .withDisclosureOption),
-        Setting(icon: UIImage(named: "vpn")!, name: "VPN", type: .withSwitchButton)],
+        [Setting(icon: "airplane", title: "Airplane Mode", type: .withSwitchButton),
+        Setting(icon: "wifi", title: "Wi-Fi", status: "Off", type: .withDisclosureOption),
+        Setting(icon: "bluetooth", title: "Bluetooth", status: "Not connected", type: .withDisclosureOption),
+        Setting(icon: "antenna.radiowaves.left.and.right", title: "Mobile Data", type: .withDisclosureOption)],
     
-       [Setting(icon: UIImage(named: "bell.badge")!, name: "Уведомления", type: .withDisclosureOption),
-        Setting(icon: UIImage(named: "speaker.wave.3.fill")!, name: "Звуки, тактильные сигналы", type: .withDisclosureOption),
-        Setting(icon: UIImage(named: "moon.fill")!, name: "Не беспокоить", type: .withDisclosureOption),
-        Setting(icon: UIImage(named: "hourglass")!, name: "Экранное время", type: .withDisclosureOption)],
+       [Setting(icon: "bell.badge.fill", title: "Notifications", type: .withDisclosureOption),
+        Setting(icon: "speaker.wave.3.fill", title: "Sounds & Haptics", type: .withDisclosureOption),
+        Setting(icon: "moon.fill", title: "Focus", type: .withDisclosureOption),
+        Setting(icon: "hourglass", title: "Screen Time", type: .withDisclosureOption)],
     
-       [Setting(icon: UIImage(named: "gear")!, name: "Основные", type: .withDisclosureOption),
-        Setting(icon: UIImage(named: "switch.2")!, name: "Пункт управления", type: .withDisclosureOption),
-        Setting(icon: UIImage(named: "textformat.size")!, name: "Экран и яркость", type: .withDisclosureOption),
-        Setting(icon: UIImage(named: "home")!, name: "Экран \"Домой\"", type: .withDisclosureOption),
-        Setting(icon: UIImage(named: "accessibility")!, name: "Универсальный доступ", type: .withDisclosureOption)]
+        [Setting(icon: "gear", title: "General", type: .withDisclosureOption),
+        Setting(icon: "switch.2", title: "Control Centre", type: .withDisclosureOption),
+        Setting(icon: "textformat.size", title: "Display & Brightness", type: .withDisclosureOption),
+        Setting(icon: "home", title: "Home Screen", type: .withDisclosureOption),
+        Setting(icon: "accessibility", title: "Accessibility", type: .withDisclosureOption),
+        Setting(icon: "sos", title: "Emergency SOS", type: .withDisclosureOption),
+        Setting(icon: "microbe.fill", title: "Exposure Notifications", type: .withDisclosureOption),
+        Setting(icon: "battery.100percent", title: "Battery", type: .withDisclosureOption),
+        Setting(icon: "hand.raised.fill", title: "Privacy & Security", type: .withDisclosureOption)]
     ]
 }

@@ -4,15 +4,15 @@ import SnapKit
 
 final class MainViewController: UIViewController {
     
-    // MARK: - State
+    // MARK: - Data & Configuration
     
     var settings: [[Setting]]?
-    var identifier: String = "Cell"
+    var identifier: String = "сell"
     
     // MARK: - UIElements
     
     private lazy var tableView: UITableView = {
-        let table = UITableView(frame: .zero, style: .grouped)
+        let table = UITableView(frame: .zero, style: .insetGrouped)
         table.dataSource = self
         table.delegate = self
         table.register(MainTableViewCell.self, forCellReuseIdentifier: identifier)
@@ -23,8 +23,7 @@ final class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
-        title = "Настройки"
+        title = "Settings"
         navigationController?.navigationBar.prefersLargeTitles = true
         setupHierarchy()
         setupLayout()
@@ -43,7 +42,7 @@ final class MainViewController: UIViewController {
     
     private func setupLayout() {
         tableView.snp.makeConstraints { make in
-            make.top.left.bottom.right.equalTo(view)
+            make.edges.equalTo(view)
         }
     }
 }

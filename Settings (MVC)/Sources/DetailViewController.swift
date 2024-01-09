@@ -4,74 +4,60 @@ import SnapKit
 
 final class DetailViewController: UIViewController {
     
-    // MARK: - State
+    // MARK: - Data & Configuration
     
-    var setting: Setting?
+    var setting: Setting? {
+        didSet {
+            if let iconName = setting?.icon {
+                icon.image = UIImage(named: iconName)
+            }
+        }
+    }
     
     // MARK: - UIElements
     
-    private lazy var chosenSettingName: UILabel = {
-        let name = UILabel()
-        name.textColor = .black
-        name.font = UIFont.systemFont(ofSize: 15)
-        return name
-    }()
-    
-    public var chosenSettingIcon: UIImageView = {
+    public var icon: UIImageView = {
         let icon = UIImageView()
+        icon.image = UIImage(named: "")
         icon.clipsToBounds = true
+        icon.contentMode = .scaleAspectFit
         return icon
     }()
     
-    private lazy var commentLabel: UILabel = {
-        let name = UILabel()
-        name.textColor = .black
-        name.textAlignment = .center
-        name.numberOfLines = 5
-        name.text = "Далее дизайн будет улучшаться :)"
-        name.clipsToBounds = true
-        name.font = UIFont.systemFont(ofSize: 15, weight: .bold)
-        return name
+    private lazy var label: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.numberOfLines = 4
+        label.text = "I promise, design will be impoved!"
+        label.clipsToBounds = true
+        label.font = UIFont.systemFont(ofSize: 15, weight: .bold)
+        return label
     }()
     
     // MARK: - Lyfecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
         setupHierarchy()
         setupLayout()
-        useModelData()
     }
     
     // MARK: - Setup & Layout
     
     private func setupHierarchy() {
-        [chosenSettingName, chosenSettingIcon, commentLabel].forEach {
-            view.addSubview($0)
-        }
+        [icon, label].forEach { view.addSubview($0) }
     }
     
     private func setupLayout() {
-        chosenSettingName.snp.makeConstraints { make in
-            make.centerX.equalTo(chosenSettingIcon)
-            make.top.equalTo(chosenSettingIcon.snp.bottom).offset(10)
-        }
-        
-        chosenSettingIcon.snp.makeConstraints { make in
+        icon.snp.makeConstraints { make in
             make.centerX.centerY.equalTo(view)
-            make.height.equalTo(90)
-            make.width.equalTo(90)
+            make.height.equalTo(75)
+            make.width.equalTo(75)
         }
         
-        commentLabel.snp.makeConstraints { make in
-            make.centerX.equalTo(chosenSettingName)
-            make.top.equalTo(chosenSettingName.snp.bottom).offset(20)
+        label.snp.makeConstraints { make in
+            make.centerX.equalTo(icon)
+            make.top.equalTo(icon.snp.bottom).offset(40)
         }
-    }
-    
-    private func useModelData() {
-        chosenSettingName.text = setting?.name
-        chosenSettingIcon.image = setting?.icon
     }
 }
