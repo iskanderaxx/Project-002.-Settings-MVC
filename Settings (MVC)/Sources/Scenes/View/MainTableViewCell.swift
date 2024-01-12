@@ -4,16 +4,18 @@ import SnapKit
 
 final class MainTableViewCell: UITableViewCell {
     
-    // MARK: - Data & Configuration
+    // MARK: - Configuration
     
-    var setting: Setting? {
-        didSet {
-            settingLabel.text = setting?.title
-            if let iconName = setting?.icon {
-                settingIcon.image = UIImage(named: iconName)
-            }
-            settingStatus.text = setting?.status
-        }
+    static let identifier = "MainTableViewCell"
+    
+    func configureView(with model: Setting) {
+        settingLabel.text = model.title
+        settingStatus.text = model.status
+        settingIcon.image = UIImage(named: model.icon)
+    }
+    
+    func configureColors(with icon: UIImage) {
+        settingIcon.image = icon
     }
     
     // MARK: - UIElements
@@ -26,9 +28,10 @@ final class MainTableViewCell: UITableViewCell {
     
     private lazy var settingIcon: UIImageView = {
         let icon = UIImageView()
-        icon.image = UIImage(named: "")
         icon.clipsToBounds = true
         icon.contentMode = .scaleAspectFit
+        icon.backgroundColor = .systemBlue
+        icon.layer.cornerRadius = 5
         return icon
     }()
     
@@ -82,7 +85,6 @@ final class MainTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         self.accessoryType = .none
-        self.setting = nil
         self.accessoryView = nil
     }
 }

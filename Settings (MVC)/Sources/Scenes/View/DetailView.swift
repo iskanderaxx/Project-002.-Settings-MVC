@@ -2,16 +2,14 @@
 import UIKit
 import SnapKit
 
-final class DetailViewController: UIViewController {
+final class DetailView: UIView {
+
+    // MARK: - Configuration
     
-    // MARK: - Data & Configuration
+    private var models = [[Setting]]()
     
-    var setting: Setting? {
-        didSet {
-            if let iconName = setting?.icon {
-                icon.image = UIImage(named: iconName)
-            }
-        }
+    func configureView(with models: [[Setting]]) {
+        self.models = models
     }
     
     // MARK: - UIElements
@@ -34,10 +32,19 @@ final class DetailViewController: UIViewController {
         return label
     }()
     
-    // MARK: - Lyfecycle
+    // MARK: - Initializers & Lifecycle
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        commonInitialier()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func commonInitialier() {
+        backgroundColor = .systemBackground
         setupHierarchy()
         setupLayout()
     }
@@ -45,12 +52,12 @@ final class DetailViewController: UIViewController {
     // MARK: - Setup & Layout
     
     private func setupHierarchy() {
-        [icon, label].forEach { view.addSubview($0) }
+        [icon, label].forEach { addSubview($0) }
     }
     
     private func setupLayout() {
         icon.snp.makeConstraints { make in
-            make.centerX.centerY.equalTo(view)
+            make.centerX.centerY.equalToSuperview()
             make.height.equalTo(75)
             make.width.equalTo(75)
         }
