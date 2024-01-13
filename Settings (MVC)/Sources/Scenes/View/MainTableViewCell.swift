@@ -12,7 +12,9 @@ final class MainTableViewCell: UITableViewCell {
         settingLabel.text = model.title
         settingStatus.text = model.status
         settingIcon.image = UIImage(named: model.icon)
-        settingIconContainer.backgroundColor = model.backgroundColor
+        if let color = BackgroundColor(rawValue: model.backgroundColor) {
+            settingIconContainer.backgroundColor = color.containerColor
+        }
     }
     
     // MARK: - UIElements
@@ -96,5 +98,44 @@ final class MainTableViewCell: UITableViewCell {
         super.prepareForReuse()
         self.accessoryType = .none
         self.accessoryView = nil
+    }
+}
+
+// Создание обертки в виде цветовых перечислений, чтобы в  Модели не было UIKit
+
+enum BackgroundColor: String {
+    case orange
+    case blue
+    case green
+    case red
+    case pink
+    case indigo
+    case gray
+    case black
+    case white
+}
+
+extension BackgroundColor {
+    var containerColor: UIColor {
+        switch self {
+        case .orange:
+            return UIColor.systemOrange
+        case .blue:
+            return UIColor.systemBlue
+        case .green:
+            return UIColor.systemGreen
+        case .red:
+            return UIColor.systemRed
+        case .pink:
+            return UIColor.systemPink
+        case .indigo:
+            return UIColor.systemIndigo
+        case .gray:
+            return UIColor.systemGray
+        case .black:
+            return UIColor.black
+        case .white:
+            return UIColor.white
+        }
     }
 }

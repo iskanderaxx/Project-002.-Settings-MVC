@@ -88,16 +88,4 @@ extension MainView: UITableViewDataSource, UITableViewDelegate {
         }
         return cell ?? UITableViewCell()
     }
-    
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let viewController = DetailController()
-//        if models[indexPath.section][indexPath.row].accessoryType == .withDisclosure {
-//            tableView.deselectRow(at: indexPath, animated: true)
-//            viewController.setting = models[indexPath.section][indexPath.row]
-//            navigationController?.pushViewController(viewController, animated: true)
-//            print("Выбрана ячейка \(models[indexPath.section][indexPath.row].title)")
-//        } else {
-//            print("Выбрана ячейка \(models[indexPath.section][indexPath.row].title), detailed view для нее не работает.")
-//        }
-//    }
 }

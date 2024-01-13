@@ -7,7 +7,7 @@ final class DetailController: UIViewController {
     
     var models: SettingsModel?
 
-    private var detailSettingsView: DetailView? {
+    var detailSettingsView: DetailView? {
         guard isViewLoaded else { return nil }
         return view as? DetailView
     }
@@ -27,7 +27,7 @@ final class DetailController: UIViewController {
     }
 }
 
-private extension DetailController {
+extension DetailController {
     func configureView() {
         guard let models = models?.createModels() else { return }
         models.forEach { [unowned self] model in

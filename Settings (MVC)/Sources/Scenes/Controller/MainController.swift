@@ -27,9 +27,7 @@ final class MainController: UIViewController {
         super.loadView()
         view = MainView()
     }
-}
 
-private extension MainController {
     func configureView() {
         guard let models = models?.createModels() else { return }
         models.forEach { [unowned self] model in
