@@ -5,7 +5,7 @@ final class DetailController: UIViewController {
 
     // MARK: - Data & Configuration
     
-    var model: SettingsModel?
+    var models: SettingsModel?
 
     private var detailSettingsView: DetailView? {
         guard isViewLoaded else { return nil }
@@ -16,7 +16,7 @@ final class DetailController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        model = SettingsModel()
+        models = SettingsModel()
         loadView()
         configureView()
     }
@@ -27,13 +27,11 @@ final class DetailController: UIViewController {
     }
 }
 
-    // MARK: - Configuration
-
-extension DetailController {
+private extension DetailController {
     func configureView() {
-        guard let models = model?.createModels() else { return }
+        guard let models = models?.createModels() else { return }
         models.forEach { [unowned self] model in
-            detailSettingsView?.configureView(with: [model])
+            detailSettingsView?.configureView(with: models)
         }
     }
 }

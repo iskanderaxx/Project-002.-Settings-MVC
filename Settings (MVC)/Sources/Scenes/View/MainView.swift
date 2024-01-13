@@ -6,7 +6,7 @@ final class MainView: UIView {
     
     // MARK: - Configuration
     
-    private var models = [[Setting]]()
+    private var models: [[Setting]] = []
     
     func configureView(with models: [[Setting]]) {
         self.models = models
@@ -64,7 +64,7 @@ extension MainView: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        45
+        46
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -88,7 +88,7 @@ extension MainView: UITableViewDataSource, UITableViewDelegate {
         }
         return cell ?? UITableViewCell()
     }
-//
+    
 //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        let viewController = DetailController()
 //        if models[indexPath.section][indexPath.row].accessoryType == .withDisclosure {
@@ -101,4 +101,3 @@ extension MainView: UITableViewDataSource, UITableViewDelegate {
 //        }
 //    }
 }
-

@@ -38,3 +38,11 @@
 //        Setting(icon: "hand.raised.fill", title: "Privacy & Security", type: .withDisclosureOption)]
 //    ]
 //}
+
+//
+//    func selectedCell(model: SettingsModel) {
+//        let detailViewController = DetailController()
+//        detailViewController.model = model
+//        navigationController?.pushViewController(detailViewController, animated: true)
+//    }
+

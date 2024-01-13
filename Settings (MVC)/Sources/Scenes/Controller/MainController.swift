@@ -5,7 +5,7 @@ final class MainController: UIViewController {
     
     // MARK: - Data & Configuration
     
-    var model: SettingsModel?
+    var models: SettingsModel?
     
     private var settingsView: MainView? {
         guard isViewLoaded else { return nil }
@@ -18,7 +18,7 @@ final class MainController: UIViewController {
         super.viewDidLoad()
         title = "Settings"
         navigationController?.navigationBar.prefersLargeTitles = true
-        model = SettingsModel()
+        models = SettingsModel()
         loadView()
         configureView()
     }
@@ -29,19 +29,11 @@ final class MainController: UIViewController {
     }
 }
 
-    // MARK: - Configuration
-
 private extension MainController {
     func configureView() {
-        guard let models = model?.createModels() else { return }
+        guard let models = models?.createModels() else { return }
         models.forEach { [unowned self] model in
-            settingsView?.configureView(with: [model])
+            settingsView?.configureView(with: models)
         }
     }
-//    
-//    func selectedCell(model: Setting) {
-//        let detailViewController = DetailController()
-//        detailViewController.model = model
-//        navigationController?.pushViewController(detailViewController, animated: true)
-//    }
 }
