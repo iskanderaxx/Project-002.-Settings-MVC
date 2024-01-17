@@ -6,7 +6,9 @@ final class MainView: UIView {
     
     // MARK: - Configuration
     
-    private var models: [[Setting]] = []
+    private var models = [[Setting]]()
+    
+    weak var navigationController: UINavigationController?
     
     func configureView(with models: [[Setting]]) {
         self.models = models
@@ -23,7 +25,7 @@ final class MainView: UIView {
         return tableView
     }()
     
-    // MARK: - Initializers & Lifecycle
+    // MARK: - Initializers
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -87,5 +89,17 @@ extension MainView: UITableViewDataSource, UITableViewDelegate {
             cell?.selectionStyle = .none
         }
         return cell ?? UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if models[indexPath.section][indexPath.row].accessoryType == .withDisclosure {
+            tableView.deselectRow(at: indexPath, animated: true)
+            let controller = DetailController()
+            controller.setting = models[indexPath.section][indexPath.row]
+            navigationController?.pushViewController(controller, animated: true)
+            print("Выбрана ячейка \(models[indexPath.section][indexPath.row].title)")
+        } else {
+            print("Выбрана ячейка \(models[indexPath.section][indexPath.row].title), detailed view для нее не работает.")
+        }
     }
 }

@@ -6,10 +6,10 @@ final class DetailView: UIView {
 
     // MARK: - Configuration
     
-    private var models: [[Setting]] = []
+    private var setting: Setting?
     
-    func configureView(with models: [[Setting]]) {
-        self.models = models
+    func configureView(with setting: Setting) {
+        self.setting = setting
     }
     
     // MARK: - UIElements
@@ -27,18 +27,11 @@ final class DetailView: UIView {
         icon.contentMode = .scaleAspectFit
         return icon
     }()
-//    public var icon: UIImageView = {
-//        let icon = UIImageView()
-//        icon.image = UIImage(named: "")
-//        icon.clipsToBounds = true
-//        icon.contentMode = .scaleAspectFit
-//        return icon
-//    }()
     
     private lazy var label: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.text = "I promise, design will be impoved!"
+        label.text = "I promise, design will be improved!"
         label.font = UIFont.systemFont(ofSize: 17, weight: .medium)
         return label
     }()

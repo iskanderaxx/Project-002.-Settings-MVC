@@ -3,12 +3,11 @@ import UIKit
 
 final class DetailController: UIViewController {
 
-    // MARK: - Data & Configuration
+    // MARK: - State
     
-    var models: SettingsModel?
-
-    var detailSettingsView: DetailView? {
-        guard isViewLoaded else { return nil }
+    var setting: Setting?
+    
+    private var detailView: DetailView? {
         return view as? DetailView
     }
     
@@ -16,7 +15,6 @@ final class DetailController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        models = SettingsModel()
         loadView()
         configureView()
     }
@@ -25,14 +23,11 @@ final class DetailController: UIViewController {
         super.loadView()
         view = DetailView()
     }
-}
-
-extension DetailController {
+    
+    // MARK: - Configuration
+    
     func configureView() {
-        guard let models = models?.createModels() else { return }
-        models.forEach { [unowned self] model in
-            detailSettingsView?.configureView(with: models)
-        }
+        guard let setting = setting else { return }
+        detailView?.configureView(with: setting)
     }
 }
-
