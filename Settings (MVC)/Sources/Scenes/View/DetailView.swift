@@ -10,6 +10,7 @@ final class DetailView: UIView {
     
     func configureView(with setting: Setting) {
         self.setting = setting
+        icon.image = UIImage(named: setting.icon)
     }
     
     // MARK: - UIElements
@@ -17,15 +18,15 @@ final class DetailView: UIView {
     private lazy var container: UIView = {
         let container = UIView()
         container.clipsToBounds = true
-        container.layer.cornerRadius = 5
-        container.backgroundColor = .lightGray
+        container.layer.cornerRadius = 10
+        container.backgroundColor = .gray
         return container
     }()
     
     private lazy var icon: UIImageView = {
         let icon = UIImageView()
-        icon.image = UIImage(named: "underConstruction")
-        icon.contentMode = .scaleAspectFill
+        icon.image = UIImage(named: "")
+        icon.contentMode = .scaleAspectFit
         return icon
     }()
     
@@ -65,12 +66,14 @@ final class DetailView: UIView {
     private func setupLayout() {
         container.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
-            make.height.equalTo(175)
-            make.width.equalTo(175)
+            make.height.equalTo(100)
+            make.width.equalTo(100)
         }
         
         icon.snp.makeConstraints { make in
             make.center.equalTo(container)
+            make.height.equalTo(40)
+            make.width.equalTo(40)
         }
         
         label.snp.makeConstraints { make in
