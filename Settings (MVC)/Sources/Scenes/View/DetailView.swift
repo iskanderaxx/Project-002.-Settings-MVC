@@ -18,20 +18,22 @@ final class DetailView: UIView {
         let container = UIView()
         container.clipsToBounds = true
         container.layer.cornerRadius = 5
-        container.backgroundColor = UIColor(named: "")
+        container.backgroundColor = .lightGray
         return container
     }()
     
     private lazy var icon: UIImageView = {
         let icon = UIImageView()
-        icon.contentMode = .scaleAspectFit
+        icon.image = UIImage(named: "underConstruction")
+        icon.contentMode = .scaleAspectFill
         return icon
     }()
     
     private lazy var label: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.text = "I promise, design will be improved!"
+        label.numberOfLines = 2
+        label.text = "The page is under construction."
         label.font = UIFont.systemFont(ofSize: 17, weight: .medium)
         return label
     }()
@@ -63,18 +65,16 @@ final class DetailView: UIView {
     private func setupLayout() {
         container.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
-            make.height.equalTo(75)
-            make.width.equalTo(75)
+            make.height.equalTo(175)
+            make.width.equalTo(175)
         }
         
         icon.snp.makeConstraints { make in
             make.center.equalTo(container)
-            make.height.equalTo(45)
-            make.width.equalTo(45)
         }
         
         label.snp.makeConstraints { make in
-            make.centerX.equalTo(icon)
+            make.centerX.equalTo(container)
             make.top.equalTo(icon.snp.bottom).offset(40)
         }
     }

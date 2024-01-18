@@ -1,11 +1,11 @@
 
 import UIKit
 
-final class MainController: UITableViewController {
+final class MainController: UITableViewController, MainViewDelegate {
     
     // MARK: - State
     
-    var models: [[Setting]]? // SettingsModel?
+    var models: [[Setting]]?
     
     private var mainView: MainView? {
         return view as? MainView
@@ -18,40 +18,31 @@ final class MainController: UITableViewController {
         title = "Settings"
         navigationController?.navigationBar.prefersLargeTitles = true
         models = SettingsModel().createModels()
-        
-        if let mainView = mainView {
-            mainView.navigationController = navigationController
-        }
-        
         loadView()
         configureView()
+        mainView?.delegate = self
     }
     
     override func loadView() {
         super.loadView()
         view = MainView()
     }
-    
+}
+
+extension MainController {
+
     // MARK: - Configuration
     
     func configureView() {
         guard let models = models else { return }
         mainView?.configureView(with: models)
     }
-}
     
-//extension MainController {
-//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        if let settingSelected = models?[indexPath.section][indexPath.row],
-//            settingSelected.accessoryType == .withDisclosure {
-//            tableView.deselectRow(at: indexPath, animated: true)
-//            let controller = DetailController()
-//            controller.setting = settingSelected
-//            navigationController?.pushViewController(controller, animated: true)
-//            print("Выбрана ячейка \(models?[indexPath.section][indexPath.row].title ?? "")")
-//        } else {
-//            print("Выбрана ячейка \(models?[indexPath.section][indexPath.row].title ?? ""), detailed view для нее не работает.")
-//        }
-//    }
-//}
+    func didSelectSetting(_ setting: Setting) {
+        let controller = DetailController()
+        controller.setting = setting
+        navigationController?.pushViewController(controller, animated: true)
+        print("Выбрана ячейка \(setting.title)")
+    }
+}
 

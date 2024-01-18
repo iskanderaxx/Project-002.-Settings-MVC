@@ -102,7 +102,6 @@ final class MainTableViewCell: UITableViewCell {
 }
 
 // Создание обертки в виде цветовых перечислений, чтобы в  Модели не было UIKit:
-
 enum BackgroundColor: String {
     case orange
     case blue

@@ -2,13 +2,17 @@
 import UIKit
 import SnapKit
 
+protocol MainViewDelegate: AnyObject {
+    func didSelectSetting(_ setting: Setting)
+}
+
 final class MainView: UIView {
     
     // MARK: - Configuration
     
     private var models = [[Setting]]()
     
-    weak var navigationController: UINavigationController?
+    weak var delegate: MainViewDelegate?
     
     func configureView(with models: [[Setting]]) {
         self.models = models
@@ -92,14 +96,12 @@ extension MainView: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if models[indexPath.section][indexPath.row].accessoryType == .withDisclosure {
-            tableView.deselectRow(at: indexPath, animated: true)
-            let controller = DetailController()
-            controller.setting = models[indexPath.section][indexPath.row]
-            navigationController?.pushViewController(controller, animated: true)
-            print("Выбрана ячейка \(models[indexPath.section][indexPath.row].title)")
+        let settingSelected = models[indexPath.section][indexPath.row]
+        tableView.deselectRow(at: indexPath, animated: true)
+        if settingSelected.accessoryType == .withDisclosure {
+            delegate?.didSelectSetting(settingSelected)
         } else {
-            print("Выбрана ячейка \(models[indexPath.section][indexPath.row].title), detailed view для нее не работает.")
+            print("Detailed view не работает для этой ячейки.")
         }
     }
 }
